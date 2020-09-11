@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Navigation from './components/navigation/Navigation';
 import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
@@ -67,7 +67,7 @@ class App extends Component {
 	}
 
 	displayFaceBox = (box) => {
-		this.setState({box: box})
+		this.setState({box: box});
 	}
 
 	onInputChange = (event) => {
@@ -75,7 +75,7 @@ class App extends Component {
 	}
 
 	onButtonSubmit = () => {
-		this.setState({imageUrl: this.state.input})
+		this.setState({imageUrl: this.state.input});
 		fetch('https://obscure-crag-51057.herokuapp.com/imageurl', {
 			method: 'post',
 			headers: {'Content-Type': 'application/json'},
@@ -135,7 +135,7 @@ class App extends Component {
 		        <FaceRecognition box={box} imageUrl={imageUrl}/>
 	    	</div>
 	    : (
-	    	route === 'signin'
+			route === 'signin'
 	    	? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
 	    	: <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange}/>
 	    	)
