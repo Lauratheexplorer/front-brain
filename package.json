@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "clarifai": "^2.9.1",
     "cors": "^2.8.5",
+    "create-react-app": "^4.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-log": "^4.0.0",
@@ -27,7 +28,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "front-brain -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
