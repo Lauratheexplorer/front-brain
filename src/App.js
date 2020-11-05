@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
-import Navigation from './components/navigation/Navigation';
-import Logo from './components/Logo/Logo';
-import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+import Particles from 'react-particles-js';
+import Clarifai from 'clarifai';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
-import Rank from './components/Rank/Rank';
+import Navigation from './components/navigation/Navigation';
 import SignIn from './components/SignIn/SignIn';
 import Register from './components/Register/Register';
-import Particles from 'react-particles-js';
+import Logo from './components/Logo/Logo';
+import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+import Rank from './components/Rank/Rank';
 import './App.css';
+
+const app = new Clarifai.App({
+	apiKey: '8766f36cdd4e437c910e744107444184'
+});
 
 const particlesOptions = {
 	particles: {
@@ -20,6 +25,7 @@ const particlesOptions = {
 		}
 	}
 }
+
 const initialState =
 	{
 		input: '',
@@ -35,12 +41,12 @@ const initialState =
 			joined: ''
 		}
 	}
+
 class App extends Component {
 	constructor() {
 		super();
 		this.state = initialState;
 		}
-
 
 	loadUser = (data) => {
 		this.setState({user: {
@@ -76,14 +82,17 @@ class App extends Component {
 
 	onButtonSubmit = () => {
 		this.setState({imageUrl: this.state.input});
-		fetch('https://obscure-crag-51057.herokuapp.com/imageurl', {
-			method: 'post',
-			headers: {'Content-Type': 'application/json'},
-			body: JSON.stringify({
-				input: this.state.input
-			})
-		})
-		.then(response => response.json())
+		app.models
+			.predict(Clarifai.FACE_DETECT_MODEL,
+				this.state.input)
+		// fetch('https://obscure-crag-51057.herokuapp.com/imageurl', {
+		// 	method: 'post',
+		// 	headers: {'Content-Type': 'application/json'},
+		// 	body: JSON.stringify({
+		// 		input: this.state.input
+		// 	})
+		// })
+		// .then(response => response.json())
 			.then(response => {
 				if (response) {
 					fetch('https://obscure-crag-51057.herokuapp.com/image', {
@@ -97,7 +106,7 @@ class App extends Component {
 					.then(count => {
 						this.setState(Object.assign(this.state.user, { entries: count }))
 						})
-					.catch(console.log)
+					// .catch(console.log)
 				}
 				this.displayFaceBox(this.calculateFaceLocation(response))
 			})
@@ -106,7 +115,7 @@ class App extends Component {
 
 	onRouteChange = (route) => {
 		if (route === 'signout') {
-			this.setState(initialState)
+			this.setState({isSignedIn: false})
 		} else if (route === 'home') {
 			this.setState({isSignedIn: true})
 		}
