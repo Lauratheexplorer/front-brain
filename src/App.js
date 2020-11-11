@@ -9,10 +9,6 @@ import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import './App.css';
 
-// const app = new Clarifai.App({
-// 	apiKey: '8766f36cdd4e437c910e744107444184'
-// });
-
 const particlesOptions = {
 	particles: {
 		number: {
@@ -59,6 +55,7 @@ class App extends Component {
 	}
 
 	calculateFaceLocation = (data) => {
+		console.log(data);
 		const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
 		const image = document.getElementById('inputimage');
 		const width = Number(image.width);
@@ -102,7 +99,7 @@ class App extends Component {
 					.then(count => {
 						this.setState(Object.assign(this.state.user, { entries: count }))
 						})
-					// .catch(console.log)
+					.catch(console.log)
 				}
 				this.displayFaceBox(this.calculateFaceLocation(response))
 			})
@@ -111,7 +108,7 @@ class App extends Component {
 
 	onRouteChange = (route) => {
 		if (route === 'signout') {
-			this.setState({isSignedIn: false})
+			this.setState(initialState)
 		} else if (route === 'home') {
 			this.setState({isSignedIn: true})
 		}
@@ -137,7 +134,7 @@ class App extends Component {
 		  			onInputChange={this.onInputChange} 
 		  			onButtonSubmit={this.onButtonSubmit}
 		  		/>
-		        <FaceRecognition box={box} imageUrl={imageUrl}/>
+		        <FaceRecognition box={box} imageUrl={imageUrl} />
 	    	</div>
 	    : (
 			route === 'signin'
