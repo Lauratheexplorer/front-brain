@@ -8,6 +8,20 @@ import Logo from './components/Logo/Logo';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Rank from './components/Rank/Rank';
 import './App.css';
+import Clarifai from 'clarifai';
+
+const app = new Clarifai.App({
+	apiKey: '8766f36cdd4e437c910e744107444184'
+   //  process.env.CLARIFAI_API
+   });
+   const handleApiCall = (req, res) => {
+	app.models
+		.predict(Clarifai.FACE_DETECT_MODEL, req.body.input)
+		.then(data => {
+			res.json(data);
+		})
+		.catch(err => res.status(400).json('unable to work with API'))
+}
 
 const particlesOptions = {
 	particles: {
