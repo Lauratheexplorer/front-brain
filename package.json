@@ -1,6 +1,6 @@
 {
   "name": "facerecongnitionapp",
-  "homepage": "https://github.com/Lauratheexplorer/front-brain.git",
+  "homepage": "https://front-brain.herokuapp.com/",
   "version": "0.1.0",
   "engines": {
     "node": "12.17.0"
