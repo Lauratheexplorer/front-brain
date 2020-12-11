@@ -1,9 +1,7 @@
 .form {
 	width: 700px;
 	background-color: #eee;
-	background-image: 
-	linear-gradient(45deg, black 25%, transparent 25%, transparent 75%, black 75%, black),
-	linear-gradient(-45deg, black 25%, transparent 25%, transparent 75%, black 75%, black);
+	background: linear-gradient(45deg, #343702 0%, #184500 20%, #187546 30%, #006782 40%, #0b1284 50%, #760ea1 60%, #83096e 70%, #840b2a 80%, #b13e12 90%, #e27412 100%);
 	background-size: 60px 60px;
 }
 
